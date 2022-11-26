@@ -7,6 +7,7 @@
 // <conio.h>はMS-DOS用のヘッダーらしいのでマックではダメでした。
 
 // [2]定数を定義する場所
+#define SPELL_COST  (3) // [2-1]呪文の消費MPを定義する
 
 // [3]列挙定数を定義する場所
 
@@ -137,6 +138,9 @@ void DrawBattleScreen(){
 
 // [6-3]コマンドを選択する関数を宣言する
 void SelectCommand(){
+    // [6-3-1]プレイヤーのコマンドを初期化する
+    characters[CHARACTER_PLAYER].command = COMMAND_FIGHT;
+    
     // [6-3-2]コマンドが決定されるまでループする
     while (1){
         // [6-3-3]戦闘画面を描画する関数を呼び出す
@@ -223,6 +227,34 @@ void Battle(int _monster){
                     break;
                 
                 case COMMAND_SPELL:  // [6-4-22]呪文
+                    // [6-4-23]MPが足りるかどうかを判定する
+                    if (characters[i].mp < SPELL_COST){
+                        // [6-4-24]MPが足りないメッセージを表示する
+                        printf("ＭＰが　たりない！\n");
+
+                        // [6-4-25]キーボード入力を待つ
+                        getchar();
+
+                        // [6-4-26]呪文を唱える処理を抜ける
+                        break;
+                    }
+                    // [6-4-27]MPを消費させる
+                    characters[i].mp -= SPELL_COST;
+
+                    // [6-4-28]画面の再描画
+                    DrawBattleScreen();
+
+                    // [6-4-31]HPを回復させる
+                    characters[i].hp = characters[i].maxHp;
+
+                    // [6-4-32]戦闘シーンの画面を再描画する
+                    DrawBattleScreen();
+
+                    // [6-4-33]HPが回復したメッセージを表示する
+                    printf("%s　のきずが　かいふくした！|\n", characters[i].name);
+
+                    // [6-4-34]キーボード入力を待つ
+                    getchar();
                     break;
                 
                 case COMMAND_RUN:    // [6-4-35]逃げる
