@@ -170,6 +170,7 @@ void SelectCommand(){
         }
         // [6-3-17]カーソルを上下にループさせる
         characters[CHARACTER_PLAYER].command = (COMMAND_MAX + characters[CHARACTER_PLAYER].command) % COMMAND_MAX;
+        getchar();
     }
 }
 
@@ -225,6 +226,12 @@ void Battle(int _monster){
                     break;
                 
                 case COMMAND_RUN:    // [6-4-35]逃げる
+                    // [6-4-36]逃げ出したメッセージを表示する
+                    printf("%sは　にげだした！\n", characters[i].name);
+                    // [6-4-37]キーボード入力を待つ
+                    getchar();
+                    // [6-4-38]戦闘処理を抜ける
+                    return;
                     break;
             }
             // [6-4-39]攻撃対象を倒したかどうかを判定する
