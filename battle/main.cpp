@@ -14,6 +14,7 @@
 enum{
     MONSTER_PLAYER, // [3-1-1]プレイヤー
     MONSTER_SLIME,  // [3-1-2]スライム
+    MONSTER_BOSS,   // [3-1-3]魔王
     MONSTER_MAX     // [3-1-4]モンスターの種類の数
 };
 
@@ -74,6 +75,19 @@ CHARACTER monsters[MONSTER_MAX] =
         "／・口・＼\n"
         "〜〜〜〜〜"
     },
+    // [5-16]MONSTER_BOSS   魔王
+    {
+        255,        // [5-1-17]int hp                  HP
+        255,        // [5-1-18]int maxHp               最大HP
+        0,          // [5-1-19]int mp                  MP
+        0,          // [5-1-20]int maxMp               最大MP
+        50,         // [5-1-21]int attack              攻撃力
+        "まおう",    // [5-1-22]char name[6 * 2 + 1]    名前
+
+        //  [5-1-23]char aa[256]    アスキーアート
+        "　Ａ＠Ａ\n"
+        "ψ（▼皿▼）ψ"
+    }
 };
 
 CHARACTER characters[CHARACTER_MAX];
@@ -219,6 +233,8 @@ void Battle(int _monster){
                 switch (characters[i].target){
                     // [6-4-41]プレイヤーなら
                     case CHARACTER_PLAYER:
+                        // [6-4-42]プレイヤーが死んだメッセージを表示する
+                        printf("あなたは　しにました");
                         break;
                     // [6-4-43]モンスターなら
                     case CHARACTER_MONSTER:
@@ -246,5 +262,5 @@ int main(){
     // [6-6-2]ゲームを初期化する関数を呼び出す
     Init();
     // [6-6-3]戦闘シーンの関数を呼び出す
-    Battle(MONSTER_SLIME);
+    Battle(MONSTER_BOSS);
 }
