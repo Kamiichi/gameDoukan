@@ -55,11 +55,11 @@ CHARACTER monsters[MONSTER_MAX] =
 {
     // [5-1-1]MONSTER_PLAYER    プレイヤー
     {
-        15,         // [5-1-2]int hp                    HP
-        15,         // [5-1-3]int maxHp                 最大HP
+        100,         // [5-1-2]int hp                    HP
+        100,         // [5-1-3]int maxHp                 最大HP
         15,         // [5-1-4]int mp                    MP
         15,         // [5-1-5]int maxMp                 最大MP
-        3,          // [5-1-6]int attack                攻撃力
+        30,          // [5-1-6]int attack                攻撃力
         "ゆうしゃ",     // [5-1-7]char name[6 * 2 + 1]    名前
     },
     // [5-1-8]MONSTER_SLIME     スライム
